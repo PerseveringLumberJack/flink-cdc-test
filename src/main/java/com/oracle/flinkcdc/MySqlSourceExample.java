@@ -2,15 +2,9 @@ package com.oracle.flinkcdc;
 
 
 import com.ververica.cdc.connectors.mysql.source.MySqlSource;
-import com.ververica.cdc.connectors.mysql.table.StartupOptions;
-import com.ververica.cdc.debezium.JsonDebeziumDeserializationSchema;
-import com.ververica.cdc.debezium.StringDebeziumDeserializationSchema;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
-import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.streaming.api.datastream.DataStreamSink;
-import org.apache.flink.streaming.api.environment.CheckpointConfig;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.api.functions.source.SourceFunction;
 
 import java.util.Properties;
 
@@ -22,8 +16,8 @@ public class MySqlSourceExample {
         MySqlSource<String> sourceFunction = MySqlSource.<String>builder()
                 .hostname("2.server")
                 .port(3306)
-                .databaseList("cds")
-                .tableList("cds.adjust_cost")
+                .databaseList("test")
+                .tableList("test.tb_user_parent")
                 .username("leomaster")
                 .password("leomastermysql")
                 .deserializer(new JsonDebeziumDeserializationSchema())
